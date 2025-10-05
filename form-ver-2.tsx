@@ -2402,7 +2402,7 @@ export default function QASLeadManagementForm(props) {
                     <div
                         style={{
                         background: "#FFF9E6",
-                        padding: "20px",
+                        padding: "0 20px 20px 20px",
                         borderRadius: "12px",
                         border: "1px solid #FFD700",
                       }}
