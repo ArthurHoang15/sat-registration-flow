@@ -65,7 +65,7 @@ export default function QASLeadManagementForm(props) {
 
         // Additional data quality points
         if (formData.satScore && parseInt(formData.satScore) > 0) score += 10
-        if (formData.birthYear && parseInt(formData.birthYear) > 1990)
+        if (formData.birthYear && parseInt(formData.birthYear) > 1900)
             score += 5
         // removed school scoring
         if (formData.targetScore && parseInt(formData.targetScore) >= 1400)
@@ -293,7 +293,7 @@ export default function QASLeadManagementForm(props) {
         if (!year) return false
         const currentYear = new Date().getFullYear()
         const num = parseInt(year)
-        return !isNaN(num) && num >= 1990 && num <= currentYear - 10
+        return !isNaN(num) && num >= 1900 && num <= currentYear - 10
     }
     const validateSatScore = (score) => {
         if (!score && score !== 0) return true
@@ -1482,7 +1482,7 @@ export default function QASLeadManagementForm(props) {
                         value={formData.birthYear}
                         onChange={(e) => updateFormData("birthYear", e.target.value)}
                         placeholder="Ví dụ: 2005"
-                        min="1990"
+                        min="1900"
                         max="2015"
                         style={{
                           width: "100%",
@@ -2025,10 +2025,12 @@ export default function QASLeadManagementForm(props) {
                       <>
                         <div
                           style={{
-                            background: "#F5FBFE",
-                            borderRadius: "12px",
-                            padding: isMobile ? "20px" : "24px",
+                            background: "white",
+                            borderRadius: "16px",
+                            padding: isMobile ? "24px" : "32px",
                             marginBottom: "24px",
+                            border: "2px solid #E8F3FF",
+                            boxShadow: "0 2px 8px rgba(0, 74, 173, 0.08)",
                           }}
                         >
                           <div
@@ -2038,7 +2040,7 @@ export default function QASLeadManagementForm(props) {
                               justifyContent: "space-between",
                               marginBottom: "24px",
                               paddingBottom: "24px",
-                              borderBottom: "1px solid #e5e5e5",
+                              borderBottom: "1px solid #E8F3FF",
                             }}
                           >
                             <h3
@@ -2054,9 +2056,9 @@ export default function QASLeadManagementForm(props) {
                             </h3>
                             <div
                               style={{
-                                width: isMobile ? "32px" : "40px",
-                                height: isMobile ? "32px" : "40px",
-                                background: "#004AAD",
+                                width: isMobile ? "40px" : "48px",
+                                height: isMobile ? "40px" : "48px",
+                                background: "#E8F3FF",
                                 borderRadius: "50%",
                                 display: "flex",
                                 alignItems: "center",
@@ -2064,15 +2066,15 @@ export default function QASLeadManagementForm(props) {
                               }}
                             >
                               <svg
-                                width={isMobile ? "16" : "20"}
-                                height={isMobile ? "16" : "20"}
+                                width={isMobile ? "20" : "24"}
+                                height={isMobile ? "20" : "24"}
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
                                 <path
                                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                  fill="white"
+                                  fill="#004AAD"
                                 />
                               </svg>
                             </div>
@@ -2087,16 +2089,17 @@ export default function QASLeadManagementForm(props) {
                           >
                             <span
                               style={{
-                                fontSize: "14px",
-                                color: "#666",
+                                fontSize: isMobile ? "14px" : "15px",
+                                color: "#2D3A62",
+                                fontWeight: "600",
                               }}
                             >
                               Thông tin liên hệ
                             </span>
                             <span
                               style={{
-                                fontSize: "16px",
-                                fontWeight: "600",
+                                fontSize: isMobile ? "15px" : "16px",
+                                fontWeight: "700",
                                 color: "#2D3A62",
                               }}
                             >
@@ -2108,17 +2111,17 @@ export default function QASLeadManagementForm(props) {
                         <div
                           style={{
                             background: "#FFF9E6",
-                            padding: "20px",
-                            borderRadius: "12px",
+                            padding: isMobile ? "16px" : isTablet ? "20px" : "24px",
+                            borderRadius: isMobile ? "8px" : "12px",
                             border: "1px solid #FFD700",
                           }}
                         >
                           <p
                             style={{
-                              fontSize: "14px",
+                              fontSize: fontSize.body,
                               color: "#2D3A62",
                               lineHeight: "1.6",
-                              marginBottom: "16px",
+                              marginBottom: isMobile ? "12px" : "16px",
                               fontWeight: "600",
                             }}
                           >
@@ -2133,11 +2136,12 @@ export default function QASLeadManagementForm(props) {
                           >
                             <li
                               style={{
-                                fontSize: "14px",
+                                fontSize: fontSize.body,
                                 color: "#2D3A62",
-                                marginBottom: "12px",
-                                paddingLeft: "24px",
+                                marginBottom: isMobile ? "10px" : "12px",
+                                paddingLeft: isMobile ? "20px" : "24px",
                                 position: "relative",
+                                lineHeight: "1.5",
                               }}
                             >
                               <span
@@ -2154,11 +2158,12 @@ export default function QASLeadManagementForm(props) {
                             </li>
                             <li
                               style={{
-                                fontSize: "14px",
+                                fontSize: fontSize.body,
                                 color: "#2D3A62",
-                                marginBottom: "12px",
-                                paddingLeft: "24px",
+                                marginBottom: isMobile ? "10px" : "12px",
+                                paddingLeft: isMobile ? "20px" : "24px",
                                 position: "relative",
+                                lineHeight: "1.5",
                               }}
                             >
                               <span
@@ -2175,10 +2180,11 @@ export default function QASLeadManagementForm(props) {
                             </li>
                             <li
                               style={{
-                                fontSize: "14px",
+                                fontSize: fontSize.body,
                                 color: "#2D3A62",
-                                paddingLeft: "24px",
+                                paddingLeft: isMobile ? "20px" : "24px",
                                 position: "relative",
+                                lineHeight: "1.5",
                               }}
                             >
                               <span
@@ -2402,17 +2408,17 @@ export default function QASLeadManagementForm(props) {
                     <div
                         style={{
                         background: "#FFF9E6",
-                        padding: "0 20px 20px 20px",
-                        borderRadius: "12px",
+                        padding: isMobile ? "16px" : isTablet ? "20px" : "24px",
+                        borderRadius: isMobile ? "8px" : "12px",
                         border: "1px solid #FFD700",
                       }}
                     >
                       <p
                         style={{
-                          fontSize: "14px",
+                          fontSize: fontSize.body,
                           color: "#2D3A62",
                           lineHeight: "1.6",
-                          marginBottom: "16px",
+                          marginBottom: isMobile ? "12px" : "16px",
                           fontWeight: "600",
                         }}
                       >
@@ -2427,11 +2433,12 @@ export default function QASLeadManagementForm(props) {
                       >
                         <li
                         style={{
-                            fontSize: "14px",
+                            fontSize: fontSize.body,
                             color: "#2D3A62",
-                            marginBottom: "12px",
-                            paddingLeft: "24px",
+                            marginBottom: isMobile ? "10px" : "12px",
+                            paddingLeft: isMobile ? "20px" : "24px",
                             position: "relative",
+                            lineHeight: "1.5",
                           }}
                         >
                           <span
@@ -2448,11 +2455,12 @@ export default function QASLeadManagementForm(props) {
                         </li>
                         <li
                           style={{
-                            fontSize: "14px",
+                            fontSize: fontSize.body,
                             color: "#2D3A62",
-                            marginBottom: "12px",
-                            paddingLeft: "24px",
+                            marginBottom: isMobile ? "10px" : "12px",
+                            paddingLeft: isMobile ? "20px" : "24px",
                             position: "relative",
+                            lineHeight: "1.5",
                           }}
                         >
                           <span
@@ -2469,10 +2477,11 @@ export default function QASLeadManagementForm(props) {
                         </li>
                         <li
                           style={{
-                            fontSize: "14px",
+                            fontSize: fontSize.body,
                             color: "#2D3A62",
-                            paddingLeft: "24px",
+                            paddingLeft: isMobile ? "20px" : "24px",
                             position: "relative",
+                            lineHeight: "1.5",
                           }}
                         >
                           <span

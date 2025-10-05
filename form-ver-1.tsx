@@ -66,7 +66,7 @@ export default function QASLeadManagementForm(props) {
 
         // Additional data quality points
         if (formData.satScore && parseInt(formData.satScore) > 0) score += 10
-        if (formData.birthYear && parseInt(formData.birthYear) > 1990)
+        if (formData.birthYear && parseInt(formData.birthYear) > 1900)
             score += 5
         if (formData.school && formData.school.trim() !== "") score += 5
         if (formData.targetScore && parseInt(formData.targetScore) >= 1400)
@@ -485,7 +485,7 @@ export default function QASLeadManagementForm(props) {
         if (!year) return false
         const currentYear = new Date().getFullYear()
         const num = parseInt(year)
-        return !isNaN(num) && num >= 1990 && num <= currentYear - 10
+        return !isNaN(num) && num >= 1900 && num <= currentYear - 10
     }
     const validateSatScore = (score) => {
         if (!score && score !== 0) return true
@@ -1581,7 +1581,7 @@ export default function QASLeadManagementForm(props) {
                                                 )
                                             }
                                             placeholder="Ví dụ: 2005"
-                                            min="1990"
+                                            min="1900"
                                             max="2015"
                                             style={{
                                                 width: "100%",
