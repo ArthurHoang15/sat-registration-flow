@@ -293,7 +293,7 @@ export default function QASLeadManagementForm(props) {
         if (!year) return false
         const currentYear = new Date().getFullYear()
         const num = parseInt(year)
-        return !isNaN(num) && num >= 1900 && num <= currentYear - 10
+        return !isNaN(num) && num >= currentYear - 100 && num <= currentYear - 10
     }
     const validateSatScore = (score) => {
         if (!score && score !== 0) return true
@@ -318,8 +318,10 @@ export default function QASLeadManagementForm(props) {
                     newErrors.fullName = "Vui lòng nhập họ tên"
                 if (!formData.birthYear)
                     newErrors.birthYear = "Vui lòng nhập năm sinh"
-                else if (!validateYear(formData.birthYear))
-                    newErrors.birthYear = "Năm sinh không hợp lệ"
+                else if (!validateYear(formData.birthYear)) {
+                    const currentYear = new Date().getFullYear()
+                    newErrors.birthYear = `Năm sinh phải từ ${currentYear - 100} đến ${currentYear - 10}`
+                }
                 if (!formData.email?.trim())
                     newErrors.email = "Vui lòng nhập email"
                 else if (!validateEmail(formData.email))
@@ -447,7 +449,8 @@ export default function QASLeadManagementForm(props) {
     // Simple submit function
     const submitForm = async () => {
         if (isSubmitting) return
-        if (!validateStep(6)) return
+        // Validate current step before submitting
+        if (!validateStep(currentStep)) return
         if (!checkRateLimit()) {
             const mins = getRemainingTime()
             setRateLimitError(
@@ -611,11 +614,11 @@ export default function QASLeadManagementForm(props) {
             >
                 <motion.div
                     style={{
-                        background: "white",
-                        borderRadius: "20px",
-                        padding: "60px",
+                        background: "#F9FDFF",
+                        borderRadius: isMobile ? "16px" : "20px",
+                        padding: isMobile ? "40px 24px" : isTablet ? "50px 32px" : "60px 48px",
                         textAlign: "center",
-                        maxWidth: "600px",
+                        maxWidth: isMobile ? "100%" : isTablet ? "700px" : "800px",
                         width: "100%",
                         boxShadow: "0 20px 40px rgba(0,74,173,0.1)",
                         border: "1px solid #e5e5e5",
@@ -627,29 +630,21 @@ export default function QASLeadManagementForm(props) {
                     {/* Paper Plane Icon */}
                     <motion.div
                         style={{
-                            display: "inline-block",
-                            marginBottom: "32px",
+                            display: "inline-block"
                         }}
                         initial={{ rotate: -20, scale: 0 }}
                         animate={{ rotate: 0, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
                     >
-                        <svg
-                            width={isMobile ? "120" : "150"}
-                            height={isMobile ? "120" : "150"}
-                            viewBox="0 0 200 200"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect x="50" y="70" width="100" height="70" rx="6" fill="#FFD54F"/>
-                          <path d="M 50 70 L 100 110 L 150 70" stroke="#FFA000" strokeWidth="3" fill="none"/>
-                          <path d="M 120 40 L 180 70 L 140 85 L 130 120 Z" fill="#42A5F5" stroke="#1976D2" strokeWidth="2"/>
-                          <path d="M 140 85 L 180 70 L 130 120" fill="#64B5F6" stroke="#1976D2" strokeWidth="2"/>
-                          <circle cx="40" cy="50" r="3" fill="#FFD54F"/>
-                          <circle cx="170" cy="130" r="3" fill="#FFD54F"/>
-                          <path d="M 160 45 L 162 50 L 167 50 L 163 53 L 165 58 L 160 55 L 155 58 L 157 53 L 153 50 L 158 50 Z" fill="#FFD54F"/>
-                          <path d="M 115 45 Q 105 55 95 60" stroke="#90CAF9" strokeWidth="2" strokeDasharray="5,5" strokeLinecap="round" fill="none"/>
-                        </svg>
+                        <img
+                            src="https://xdjnxagkgpvtmitbskzg.supabase.co/storage/v1/object/public/email-marketing/sent.png"
+                            alt="Email sent icon"
+                            style={{
+                                width: isMobile ? "240px" : "300px",
+                                height: isMobile ? "240px" : "300px",
+                                objectFit: "contain",
+                            }}
+                        />
                     </motion.div>
 
                     <motion.h1
@@ -826,9 +821,15 @@ export default function QASLeadManagementForm(props) {
                             whileHover={{ scale: 1.15, rotate: 5 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 1.623-.015 3.027-.314 4.176-.891.73-.367 1.339-.812 1.808-1.322.298-.324.527-.67.684-1.03.124-.287.186-.57.186-.848 0-.256-.062-.486-.184-.702a1.724 1.724 0 0 0-.5-.577 2.01 2.01 0 0 0-.732-.38 3.465 3.465 0 0 0-.919-.123c-.396 0-.774.062-1.128.184-.354.123-.671.296-.948.519a2.91 2.91 0 0 0-.673.766 2.23 2.23 0 0 0-.262.988c0 .396.093.75.279 1.064.186.313.443.577.773.793.33.215.716.377 1.159.485.442.108.92.163 1.433.163.843 0 1.613-.146 2.31-.437a5.44 5.44 0 0 0 1.808-1.215c.509-.521.906-1.142 1.193-1.861.287-.72.43-1.507.43-2.362 0-1.213-.287-2.3-.862-3.26a6.185 6.185 0 0 0-2.34-2.197c-1.006-.547-2.155-.82-3.447-.82-1.292 0-2.441.273-3.447.82a6.185 6.185 0 0 0-2.34 2.197c-.575.96-.862 2.047-.862 3.26 0 .73.108 1.406.324 2.027.215.621.527 1.157.935 1.608.408.451.906.804 1.495 1.058.588.255 1.249.382 1.982.382.843 0 1.613-.146 2.31-.437a5.44 5.44 0 0 0 1.808-1.215c.509-.521.906-1.142 1.193-1.861.287-.72.43-1.507.43-2.362 0-.855-.143-1.642-.43-2.362a5.956 5.956 0 0 0-1.193-1.861 5.44 5.44 0 0 0-1.808-1.215c-.697-.291-1.467-.437-2.31-.437-.732 0-1.394.127-1.982.382-.589.254-1.087.607-1.495 1.058a4.906 4.906 0 0 0-.935 1.608 5.858 5.858 0 0 0-.324 2.027c0 1.213.287 2.3.862 3.26a6.185 6.185 0 0 0 2.34 2.197c1.006.547 2.155.82 3.447.82 1.292 0 2.441-.273 3.447-.82a6.185 6.185 0 0 0 2.34-2.197c.575-.96.862-2.047.862-3.26z"/>
-                            </svg>
+                            <img 
+                                src="https://xdjnxagkgpvtmitbskzg.supabase.co/storage/v1/object/public/icons/white/threads.png"
+                                alt="Threads"
+                                style={{
+                                    width: isMobile ? "20px" : "22px",
+                                    height: isMobile ? "20px" : "22px",
+                                    objectFit: "contain",
+                                }}
+                            />
                         </motion.a>
                     </motion.div>
                 </motion.div>
@@ -839,6 +840,15 @@ export default function QASLeadManagementForm(props) {
     return (
         <>
         <style>{`
+          input[type="text"]:focus,
+          input[type="email"]:focus,
+          input[type="tel"]:focus,
+          input[type="number"]:focus,
+          textarea:focus {
+            outline: none;
+            border-color: #004AAD !important;
+          }
+          
           input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
@@ -1482,8 +1492,8 @@ export default function QASLeadManagementForm(props) {
                         value={formData.birthYear}
                         onChange={(e) => updateFormData("birthYear", e.target.value)}
                         placeholder="Ví dụ: 2005"
-                        min="1900"
-                        max="2015"
+                        min={new Date().getFullYear() - 100}
+                        max={new Date().getFullYear() - 10}
                         style={{
                           width: "100%",
                           padding: "16px",
