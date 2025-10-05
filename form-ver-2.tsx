@@ -2248,21 +2248,15 @@ export default function QASLeadManagementForm(props) {
                           flexShrink: 0,
                         }}
                       >
-                        <svg
-                          width={isMobile ? "18" : "22"}
-                          height={isMobile ? "18" : "22"}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        <img
+                          src="https://xdjnxagkgpvtmitbskzg.supabase.co/storage/v1/object/public/icons/white/badge-check.png"
+                          alt="Badge check icon"
+                          style={{
+                            width: isMobile ? "18px" : "22px",
+                            height: isMobile ? "18px" : "22px",
+                            objectFit: "contain",
+                          }}
+                        />
                       </div>
                       <h2
                         style={{
@@ -2288,10 +2282,12 @@ export default function QASLeadManagementForm(props) {
                     {/* Confirmation Content */}
                     <div
                       style={{
-                        background: "#F5FBFE",
-                        borderRadius: "12px",
-                        padding: isMobile ? "20px" : "24px",
+                        background: "white",
+                        borderRadius: "16px",
+                        padding: isMobile ? "24px" : "32px",
                         marginBottom: "24px",
+                        border: "2px solid #E8F3FF",
+                        boxShadow: "0 2px 8px rgba(0, 74, 173, 0.08)",
                       }}
                     >
                       <div
@@ -2301,7 +2297,7 @@ export default function QASLeadManagementForm(props) {
                           justifyContent: "space-between",
                           marginBottom: "24px",
                           paddingBottom: "24px",
-                          borderBottom: "1px solid #e5e5e5",
+                          borderBottom: "1px solid #E8F3FF",
                         }}
                       >
                         <h3
@@ -2317,9 +2313,9 @@ export default function QASLeadManagementForm(props) {
                         </h3>
                           <div
                             style={{
-                            width: isMobile ? "32px" : "40px",
-                            height: isMobile ? "32px" : "40px",
-                            background: "#004AAD",
+                            width: isMobile ? "40px" : "48px",
+                            height: isMobile ? "40px" : "48px",
+                            background: "#E8F3FF",
                             borderRadius: "50%",
                             display: "flex",
                             alignItems: "center",
@@ -2327,15 +2323,15 @@ export default function QASLeadManagementForm(props) {
                           }}
                         >
                           <svg
-                            width={isMobile ? "16" : "20"}
-                            height={isMobile ? "16" : "20"}
+                            width={isMobile ? "20" : "24"}
+                            height={isMobile ? "20" : "24"}
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
                               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                              fill="white"
+                              fill="#004AAD"
                             />
                           </svg>
                           </div>
@@ -2344,7 +2340,7 @@ export default function QASLeadManagementForm(props) {
                       <div
                         style={{
                           display: "grid",
-                          gap: "16px",
+                          gap: "20px",
                         }}
                       >
                         <div
@@ -2356,16 +2352,17 @@ export default function QASLeadManagementForm(props) {
                         >
                           <span
                             style={{
-                              fontSize: "14px",
-                              color: "#666",
+                              fontSize: isMobile ? "14px" : "15px",
+                              color: "#2D3A62",
+                              fontWeight: "600",
                             }}
                           >
                             Khóa học
                           </span>
                           <span
                             style={{
-                          fontSize: "16px",
-                              fontWeight: "600",
+                          fontSize: isMobile ? "15px" : "16px",
+                              fontWeight: "700",
                               color: "#2D3A62",
                             }}
                           >
@@ -2382,16 +2379,17 @@ export default function QASLeadManagementForm(props) {
                         >
                           <span
                             style={{
-                            fontSize: "14px",
-                              color: "#666",
+                            fontSize: isMobile ? "14px" : "15px",
+                              color: "#2D3A62",
+                              fontWeight: "600",
                             }}
                           >
                             Thông tin liên hệ
                           </span>
                           <span
                             style={{
-                              fontSize: "16px",
-                              fontWeight: "600",
+                              fontSize: isMobile ? "15px" : "16px",
+                              fontWeight: "700",
                               color: "#2D3A62",
                             }}
                           >
